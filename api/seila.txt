@@ -1,0 +1,129 @@
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="chave"
+
+170541492376488965a6910b5ff97
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="cnpjEmissor"
+
+1234567889
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="ufEmissor"
+
+SP
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="cNfEmissor"
+
+SEM AINDA
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="codigoMunicipioEmissor"
+
+3530805
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="razaoSocialEmissor"
+
+Empresa Teste LTDA
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="ieEmissor"
+
+1234567889
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="ruaEmissor"
+
+TesteTeste
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="numeroRuaEmissor"
+
+1234567889
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomeBairroEmissor"
+
+Teste
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomeCidadeEmissor"
+
+Moji Mirim
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="cepEmissor"
+
+1234567889
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="codigoPaisEmissor"
+
+1058
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomePaisEmissor"
+
+BRASIL
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="razaoSocialEmissorDest"
+
+ Willian cunha 
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="ruaDest"
+
+Rua Erico Verissimo
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomeBairroDest"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="codigoMunicipioDest"
+
+111
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomeCidadeDest"
+
+MOGI MIRIM
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="siglaUFDest"
+
+SP
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="cepEmissorDest"
+
+13802-476
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="codigoPaisDest"
+
+1058
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nomePaisDest"
+
+BRASIL
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="modFrete"
+
+0
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="quantidadeVol"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="especie"
+
+cx
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="marcaCiaxa"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="nVolume"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="pesoLiquido"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="pesoBruto"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="aLacres"
+
+
+--------------------------fdf72fb9e14eed2a
+Content-Disposition: attachment; name="quantidadeParcelas"
+
+
+--------------------------fdf72fb9e14eed2a--
