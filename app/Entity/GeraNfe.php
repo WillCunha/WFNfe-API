@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Entity;
 
 require_once '../vendor/autoload.php';
 
@@ -295,8 +295,8 @@ class GeraNfe
         $std->mod = 55;
         $std->serie = 1;
         $std->nNF = 10;
-        $std->dhEmi = $diaEmissao."T".$horaEmissao."-03:00";
-        $std->dhSaiEnt = $diaEmissao."T".$horaEmissao."-03:00";
+        $std->dhEmi = $diaEmissao . "T" . $horaEmissao . "-03:00";
+        $std->dhSaiEnt = $diaEmissao . "T" . $horaEmissao . "-03:00";
         $std->tpNF = 1;
         $std->idDest = 1;
         $std->cMunFG = self::$codigoMunicipioEmissor;
@@ -354,6 +354,8 @@ class GeraNfe
         $i = 0;
         $baseICMS = 0;
 
+        $totalGeral = self::$totalVenda;
+
 
         $produtos = self::$arrayProdutos;
         foreach ($produtos as $prod) {
@@ -385,7 +387,7 @@ class GeraNfe
             $std->qTrib = $prod->qTrib;
             $std->vUnTrib = $prod->vUnTrib;
             $std->vFrete = $prod->vFrete;
-            $std->vDesc = $prod->vDesc;
+            $std->vDesc = "0";
             $std->indTot = $prod->indTot;
 
 
@@ -413,7 +415,7 @@ class GeraNfe
             //ICMS - Imposto sobre Circulação de Mercadorias e Serviços
             $std = new \stdClass();
             $std->item = $prod->nItem; //produtos 1
-            $std->orig = $prod->orig;
+            $std->orig = $orig;
             $std->CST = $prod->CST; // Tributado Integralmente
             $std->modBC = $campoModBc;
             $std->vBC = $valorTotal;   //$qTrib * $vUnTrib
@@ -437,6 +439,7 @@ class GeraNfe
             $vICMS = $std->vICMS;
 
             $nfe->tagICMS($std);
+
 
 
             //IPI - Imposto sobre Produto Industrializado
@@ -514,7 +517,7 @@ class GeraNfe
         $vProd = self::$totalVenda;
         $vFrete = '0.00';
         $vSeg = '0.00';
-        $vDesc = '0.00';
+        $vDesc = '0';
         $vII = '0.00';
         $vIPI += $vIPI;
         $vPIS += $vPIS;
@@ -562,7 +565,7 @@ class GeraNfe
             $std = new \stdClass();
             $std->nDup = $dup[0]; //Código da Duplicata
             $std->dVenc = $dup[1]; //Vencimento
-            $std->vDup = $dup[2]; // Valor
+            $std->vDup = "99.00"; // Valor
             $nfe->tagdup($std);
         }
 
@@ -574,11 +577,22 @@ class GeraNfe
         $totalT = number_format($aleatorio1, 2, ',', '.');
         $textoIBPT = "Valor Aprox. Tributos R$ {$totalT} - {$federal} Federal, {$estadual} Estadual e {$municipal} Municipal.";
 
+
+        $std = new \stdClass();
+        $std->vTroco = "0";
+        $nfe->tagpag($std);
+
+        $std = new \stdClass();
+        $std->indPag = "0";
+        $std->tPag = "15";
+        $std->vPag = "90.00";
+        $nfe->tagdetPag($std);
+
         //Informações Adicionais
         //$infAdFisco = "SAIDA COM SUSPENSAO DO IPI CONFORME ART 29 DA LEI 10.637";
         $std = new \stdClass();
         $std->infAdFisco = "";
-        $std->infCpl = "WF Soft - www.wfsoft.com.br | {$textoIBPT} ";
+        $std->infCpl = "WF Soft - www.wfsoft.com.br | {$textoIBPT}  | " .$totalGeral. "";
         $nfe->taginfAdic($std);
 
         $std = new \stdClass();
@@ -588,8 +602,9 @@ class GeraNfe
         $std->fone = '19998064472';
         $nfe->taginfRespTec($std);
 
-        echo "Valor na string IPINT: " . $ipINT;
         $std = $nfe->montaNFe();
+
+        $nfe->getErrors();
 
         if ($std) {
             header('Content-type: text/xml; charset=UTF-8');
@@ -608,8 +623,9 @@ class GeraNfe
                 echo 'tag: &lt;' . $err['tag'] . '&gt; ---- ' . $err['desc'] . '<br>';
             }
         }
-        $nfe->getErrors();
 
-        return;
+        $erro = $nfe->getErrors();
+
+        return $erro;
     }
 }

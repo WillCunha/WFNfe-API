@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wf/nfe',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '72e358e4292c71269d5303a453270b6747a9ccb1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -38,9 +38,9 @@
             'dev_requirement' => false,
         ),
         'nfephp-org/sped-nfe' => array(
-            'pretty_version' => 'v5.1.18',
-            'version' => '5.1.18.0',
-            'reference' => 'f3e1577760acc5f9de12c6ca24ef4ffbbe8e6945',
+            'pretty_version' => 'v5.1.24',
+            'version' => '5.1.24.0',
+            'reference' => 'c54d8b6a577fc2df97afde3e14c9fa1ba0b15f3e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nfephp-org/sped-nfe',
             'aliases' => array(),
@@ -56,9 +56,9 @@
             'dev_requirement' => false,
         ),
         'wf/nfe' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '72e358e4292c71269d5303a453270b6747a9ccb1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

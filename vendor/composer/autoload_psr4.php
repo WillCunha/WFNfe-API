@@ -12,4 +12,5 @@ return array(
     'NFePHP\\Common\\' => array($vendorDir . '/nfephp-org/sped-common/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'App\\' => array($baseDir . '/app'),
+    'Api\\' => array($baseDir . '/api'),
 );

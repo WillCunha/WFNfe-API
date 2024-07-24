@@ -1,8 +1,11 @@
 <?php
 
-use App\GeraNfe;
+use App\Entity\AssinaNfe;
+use App\File\Upload;
+use App\Entity\GeraNfe;
 use App\InsereVenda;
 //|| $param == ''
+
 
 if ($acao == '') {
     echo json_encode(["Erro:" => "Ação não permitida"]);
@@ -30,7 +33,7 @@ if ($acao == '') {
         geraNfe::$cepEmissor = $data->cepEmissor;
         geraNfe::$codigoPaisEmissor = $data->codigoPaisEmissor;
         geraNfe::$nomePaisEmissor = $data->nomePaisEmissor;
-        
+
         geraNfe::$razaoSocialDest = $data->razaoSocialEmissorDest;
         geraNfe::$indIEDest = $data->indIEDest;
         geraNfe::$cnpjDest = $data->cnpjDest;
@@ -41,7 +44,7 @@ if ($acao == '') {
         geraNfe::$nomeCidadeDest = $data->nomeCidadeDest;
         geraNfe::$siglaUFDest = $data->siglaUFDest;
         geraNfe::$cepDest = $data->cepEmissorDest;
-        
+
         geraNfe::$arrayProdutos = $data->produtos;
 
         geraNfe::$modFrete = $data->modFrete;
@@ -54,8 +57,18 @@ if ($acao == '') {
         //$venda->quantidade = $data->quantidade;
         //$atualiza = $venda->atualiza();
         echo json_encode(["dados" => $insereDados]);
-    }
-    else if ($acao == 'assina'){
-        
+    } else if ($acao == 'grava-certificado') {
+        if (isset($_FILES['certificado']['tmp_name'])) {
+            $upload = new Upload($_FILES['certificado']);
+            $upload->name = $param;
+            $upload->upload(__DIR__ . './../../files');
+        } else {
+            echo json_encode(["Erro: " => "É necessário informar um arquivo."]);
+        }
+    }else if ($acao == 'assina-nfe'){
+        $fp = fopen('php://input', 'r');
+        $rawData = stream_get_contents($fp);
+        $data =  json_decode($rawData);
+        $assinaNfe = new AssinaNfe($data, $param);
     }
 }
