@@ -229,6 +229,13 @@ class GeraNfe
     static public  $totalVenda;
 
     /**
+     * Forma de Pagamento
+     * 
+     * @var string
+     */
+    static public $tipoPagamento;
+
+    /**
      * Variavel que carrega o modo de frete
      * 
      * @var stdClass
@@ -387,7 +394,7 @@ class GeraNfe
             $std->qTrib = $prod->qTrib;
             $std->vUnTrib = $prod->vUnTrib;
             $std->vFrete = $prod->vFrete;
-            $std->vDesc = "0";
+            $std->vDesc = "0.01";
             $std->indTot = $prod->indTot;
 
 
@@ -404,12 +411,12 @@ class GeraNfe
             $cstcofins = $std->cstcofins;
             $cofins = $std->cofins;
 
-            InsereProdutos::$idProduto = $std->cProd;
-            InsereProdutos::$idVenda = $idVenda;
-            InsereProdutos::$nome = $std->xProd;
-            InsereProdutos::$quantidade = $std->qCom;
-            InsereProdutos::$total = $std->vProd;
-            InsereProdutos::insereBanco();
+            // InsereProdutos::$idProduto = $std->cProd;
+            // InsereProdutos::$idVenda = $idVenda;
+            // InsereProdutos::$nome = $std->xProd;
+            // InsereProdutos::$quantidade = $std->qCom;
+            // InsereProdutos::$total = $std->vProd;
+            // InsereProdutos::insereBanco();
             $nfe->tagprod($std);
 
             //ICMS - Imposto sobre Circulação de Mercadorias e Serviços
@@ -554,19 +561,21 @@ class GeraNfe
 
         $parcelas = self::$quantidadeParcelas;
         $valorParcelas = self::$totalVenda / $parcelas;
-        $aDup[] = array();
+        $aDup = array();
         for ($i = 0; $i < $parcelas; $i++) {
-            $aDup = array(
-                array($codigoFatura . '-' . $i, '2016-06-20', $valorParcelas),
-            );
-        }
+            //$aDup = array($codigoFatura . '-' . $parcelas, '2016-06-20', $valorParcelas);
+            $aDup = [
+                "0" => $codigoFatura,
+                "1" => "2024-12-12",
+                "2" => $valorParcelas,
+            ];
 
-        foreach ($aDup as $dup) {
             $std = new \stdClass();
-            $std->nDup = $dup[0]; //Código da Duplicata
-            $std->dVenc = $dup[1]; //Vencimento
-            $std->vDup = "99.00"; // Valor
+            $std->nDup = $aDup[0]; //Código da Duplicata
+            $std->dVenc = $aDup[1]; //Vencimento
+            $std->vDup = $aDup[2]; // Valor
             $nfe->tagdup($std);
+
         }
 
         $aleatorio1 = '1000000';
@@ -583,9 +592,9 @@ class GeraNfe
         $nfe->tagpag($std);
 
         $std = new \stdClass();
-        $std->indPag = "0";
-        $std->tPag = "15";
-        $std->vPag = "90.00";
+        $std->indPag = "1";
+        $std->tPag = self::$tipoPagamento;
+        $std->vPag =  self::$totalVenda ;
         $nfe->tagdetPag($std);
 
         //Informações Adicionais
@@ -612,7 +621,8 @@ class GeraNfe
 
             // $filename = "/var/www/nfe/homologacao/entradas/{self::$chave}-nfe.xml"; // Ambiente Linux
 
-            $filename = "C:/xampp/htdocs/homologacao/entradas/" . self::$chave . "-nfe.xml"; // Ambiente Windows
+            $filename = "../../files/xml/" . self::$chave . "-nfe.xml"; // Ambiente Windows
+        
 
             file_put_contents($filename, $xml);
             chmod($filename, 0777);

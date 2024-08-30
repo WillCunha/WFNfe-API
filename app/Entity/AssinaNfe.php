@@ -134,7 +134,7 @@ class AssinaNfe
         $this->senha = $data->senha;
         $this->algoritimo = OPENSSL_ALGO_SHA1;
         $this->canonical = [true,false,null,null];
-        $this->xml = file_get_contents("C:/xampp/htdocs/homologacao/entradas/" . $this->chave ."");
+        $this->xml = file_get_contents(__DIR__ . '../../../files/xml/' . $this->chave ."");
         $this->certificado = file_get_contents(__DIR__ . '../../../files/' . $this->certificado);
         $this->insereDados();
     }
@@ -166,7 +166,7 @@ class AssinaNfe
 
             echo $this->xmlAssinado;
 
-            $filename = "C:/xampp/htdocs/homologacao/entradas/" . $this->chave; // Ambiente Windows
+            $filename = __DIR__ . '../../../files/xml/' . $this->chave; // Ambiente Windows
 
             file_put_contents($filename, $this->xmlAssinado);
             chmod($filename, 0777);

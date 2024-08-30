@@ -14,28 +14,28 @@ Class Database{
      * @var string
      * 
      */
-    const HOST = "localhost";
+    const HOST = "auth-db1576.hstgr.io";
 
     /**
      * DEFINE O NOME DO BANCO
      * 
      * @var string
      */
-    const NAME = "wfnfe";
+    const NAME = "u199574217_wfsoft";
 
     /**
      * DEFINE O USER DO BANCO
      * 
      * @var string
      */
-    const user = "root";
+    const user = "u199574217_wfsoft";
 
     /**
      * DEFINE A SENHA DO BANCO
      * 
      * @var string
      */
-    const pass = "";
+    const pass = "b8Uy8h5&";
 
     /**
      * DEFINE A TABELA

@@ -1,6 +1,7 @@
 <?php
 
 use App\Entity\AssinaNfe;
+use App\Entity\EnviaLote;
 use App\File\Upload;
 use App\Entity\GeraNfe;
 use App\InsereVenda;
@@ -14,12 +15,16 @@ if ($acao == '') {
         $fp = fopen('php://input', 'r');
         $rawData = stream_get_contents($fp);
         $data =  json_decode($rawData);
-        new InsereVenda($data);
+        //new InsereVenda($data);
         $arquivo = fopen('qualquercoisa.json', 'w');
         fwrite($arquivo, $rawData);
         fclose($arquivo);
 
         $geraNfe = new GeraNfe;
+
+        geraNfe::$totalVenda = $data->valor_total;
+        GeraNfe::$tipoPagamento = $data->tipo_pagamento;
+
         geraNfe::$chave = $data->chave;
         geraNfe::$razaoSocialEmissor = $data->razaoSocialEmissor;
         geraNfe::$ieEmissor = $data->ieEmissor;
@@ -56,7 +61,7 @@ if ($acao == '') {
         $dados = GeraNfe::GeraNFE();
         //$venda->quantidade = $data->quantidade;
         //$atualiza = $venda->atualiza();
-        echo json_encode(["dados" => $insereDados]);
+        echo json_encode(["dados" => $dados]);
     } else if ($acao == 'grava-certificado') {
         if (isset($_FILES['certificado']['tmp_name'])) {
             $upload = new Upload($_FILES['certificado']);
@@ -65,10 +70,30 @@ if ($acao == '') {
         } else {
             echo json_encode(["Erro: " => "É necessário informar um arquivo."]);
         }
-    }else if ($acao == 'assina-nfe'){
+    } else if ($acao == 'assina-nfe') {
         $fp = fopen('php://input', 'r');
         $rawData = stream_get_contents($fp);
         $data =  json_decode($rawData);
         $assinaNfe = new AssinaNfe($data, $param);
+    } else if ($acao == 'envia-lote') {
+        $fp = fopen('php://input', 'r');
+        $rawData = stream_get_contents($fp);
+        $data =  json_decode($rawData);
+        // $data = [
+        //     'idLote' => '0000100',
+        //     'atualizacao' => '2024-07-07 06:01:21',
+        //     'tpAmb' => 2,
+        //     'razaoSocial' => 'Teste dos Testes S.A.',
+        //     'siglaUF' => 'SP',
+        //     'cnpj' => '05832532000129',
+        //     'schemes' => 'PL_009_V4',
+        //     'versao' => '4.00',
+        //     'tokenIBPT' => 'aaaaa',
+        //     'certificado' => '1721179335-168760-66971cc73a5d2.pfx',
+        //     'chave' => '172185447519959566a16a0b7f2fe-nfe.xml',
+        //     'senha' => 'minhasenha',
+        // ];
+        $enviaLote = new EnviaLote($data);
+
     }
 }

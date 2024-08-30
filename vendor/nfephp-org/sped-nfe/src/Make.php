@@ -8257,7 +8257,8 @@ class Make
      */
     public function getErrors(): array
     {
-        $filename = "C:/xampp/htdocs/homologacao/entradas/erros-nfe.txt"; // Ambiente Windows
+        $filename = "C:/xampp/htdocs/homologacao/entradas/erros-nfe.txt"; // Ambiente Windows   
+        
 
         file_put_contents($filename, $this->errors);
         chmod($filename, 0777);
